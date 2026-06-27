@@ -1,1 +1,1 @@
-# agentic_ai_and_ops
+# Agentic AI and Ops
