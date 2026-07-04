@@ -8,7 +8,7 @@ dependencies = [
     "anthropic>=0.112.0",
     "fastapi>=0.138.1",
     "openai>=2.44.0",
-    "pydantic>=2.13.4",
+    "pydantic[email]>=2.13.4",
     "python-dotenv>=1.2.2",
     "requests>=2.34.2",
 ]
