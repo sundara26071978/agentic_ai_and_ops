@@ -1,0 +1,5 @@
+{'messages': [HumanMessage(content="What's the weather in San Francisco?", additional_kwargs={}, re...id='364fc3f3-45ea-41ef-a1b6-b8478de4db83'), AIMessage(content='', additional_kwargs={}, response_metadata={'model': 'qwen3.5:late...'output_tokens': 70, 'total_tokens': 351
+        }), ToolMessage(content="It's always sunny in San Francisco!", name='get_weather', id='31...id='c2f0a670-fd3b-4bf9-b458-ff09dba3713d'), AIMessage(content='According to my weather check, **San Francisco** has been experien...output_tokens': 576, 'total_tokens': 909
+    })
+]
+}
