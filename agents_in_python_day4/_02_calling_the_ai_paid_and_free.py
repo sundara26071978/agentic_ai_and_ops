@@ -5,7 +5,9 @@ Setup: uv add openai anthropic python-dotenv
 """
 
 import os
-
+import json
+import pprint
+from urllib import response
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -49,6 +51,9 @@ def ask_anthropic(question: str) -> str:
     )
     return response.content[0].text
 
+def pretty_print(response)-> None:
+    pretty_json = json.dumps(response.model_dump(), indent=4)
+    print(pretty_json)
 
 def ask_groq(question: str) -> str:
     """Free. Groq uses the OpenAI SDK, pointed at Groq's own base_url --
@@ -62,8 +67,20 @@ def ask_groq(question: str) -> str:
         max_tokens=200,
         messages=[{"role": "user", "content": question}],
     )
+    pretty_print(response)
+
     return response.choices[-1].message.content
 
+def ask_ollamalocal(question:str)->str:
+    from openai import OpenAI
+    client= OpenAI(api_key="ollama", base_url="http://localhost:11434/v1")
+    response =client.chat.completions.create(
+        model="gemma4",
+        max_tokens=32000,
+        messages=[{"role":"user","content":question}],
+    )
+    pretty_print(response)
+    return response.choices[0].message.content
 
 def ask_openrouter(question: str) -> str:
     """Free. Also OpenAI-shaped. The model name "openrouter/free" auto-routes
@@ -86,6 +103,8 @@ def ask_ai(question: str) -> str:
     first, then paid. Raises clearly if nothing is configured, rather than
     silently returning a placeholder answer.
     """
+    if os.environ.get("OLLAMA_API_KEY"):
+        return ask_ollamalocal(question)
     if os.environ.get("GROQ_API_KEY"):
         return ask_groq(question)
     if os.environ.get("OPENROUTER_API_KEY"):
@@ -102,4 +121,5 @@ def ask_ai(question: str) -> str:
 
 if __name__ == "__main__":
     question = "In one short sentence, what does an AI agent do that a plain chatbot can't?"
+
     print(ask_ai(question))
