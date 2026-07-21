@@ -12,6 +12,18 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+model = init_chat_model("llama-3.3-70b-versatile",
+                        api_key=os.environ["GROQ_API_KEY"],
+                        model_provider="groq",
+                        # base_url="https://api.groq.com/openai/v1",
+                        max_tokens=1000, temperature=0.0)
+
+# model = init_chat_model("openai/gpt-4o-mini",
+#                         api_key=os.environ["OPENROUTER_API_KEY"],
+#                         model_provider="openrouter",
+#                         base_url="https://openrouter.ai/api/v1",
+#                         max_tokens=1000, temperature=0.0)
+
 # model = init_chat_model("nvidia/nemotron-3-ultra-550b-a55b:free",
 #                         api_key=os.environ["OPENROUTER_API_KEY"],
 #                         model_provider="openrouter",
@@ -19,11 +31,11 @@ load_dotenv()
 #                         max_tokens=1000, temperature=0.0)
 
 
-model = init_chat_model("openrouter/free",
-                        api_key=os.environ["OPENROUTER_API_KEY"],
-                        model_provider="openrouter",
-                        base_url="https://openrouter.ai/api/v1",
-                        max_tokens=1000, temperature=0.0)
+# model = init_chat_model("openrouter/free",
+#                         api_key=os.environ["OPENROUTER_API_KEY"],
+#                         model_provider="openrouter",
+#                         base_url="https://openrouter.ai/api/v1",
+#                         max_tokens=1000, temperature=0.0)
 
 
 response = model.invoke("which model are you?")
