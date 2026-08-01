@@ -25,24 +25,36 @@ import pprint
 from langchain.chat_models import init_chat_model
 import os
 from dotenv import load_dotenv
+import asyncio
 load_dotenv()
 # Initialize model with Ollama backend
-model = init_chat_model("qwen3.5:latest", max_tokens=200, temperature=0.3, model_provider="ollama")
+# model = init_chat_model("qwen3.5:latest", max_tokens=200, temperature=0.3, model_provider="ollama")
 
-# model = init_chat_model("llama-3.3-70b-versatile",
-#                         api_key=os.environ["GROQ_API_KEY"],
-#                         model_provider="groq",
-#                         # base_url="https://api.groq.com/openai/v1",
-#                         max_tokens=1000, temperature=0.0)
+model = init_chat_model("llama-3.3-70b-versatile",
+                        api_key=os.environ["GROQ_API_KEY"],
+                        model_provider="groq",
+                        # base_url="https://api.groq.com/openai/v1",
+                        max_tokens=1000, temperature=0.0)
 
 # Stream responses token-by-token
 # Each chunk is a partial response that arrives in real-time
-for chunk in model.stream("write a short poem about agentic AI systems in less than 100 words"):
-    # chunk.text contains the token text
-    # end="|" shows token boundaries
-    # flush=True sends output immediately instead of buffering
-    print(chunk.text, end="|", flush=True)
+async def main():
+  async for event in model.astream_events("Hello"):
 
+      if event["event"] == "on_chat_model_start":
+          print(f"Input: {event['data']['input']}")
+
+      elif event["event"] == "on_chat_model_stream":
+          print(f"Token: {event['data']['chunk'].text}")
+
+      elif event["event"] == "on_chat_model_end":
+          print(f"Full message: {event['data']['output'].text}")
+
+      else:
+          pass
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
 print("\n\n--- Full Response ---")
 
