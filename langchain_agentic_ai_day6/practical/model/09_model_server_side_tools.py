@@ -39,16 +39,33 @@ Resources:
 
 import pprint
 from langchain.chat_models import init_chat_model
+import urllib.error
+import urllib.request
+import pprint
+from langchain.tools import tool
+
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv("C:\\Users\\socgen\\ML\\agentic_ai_and_ops\\langchain_day5\\.env")
+
 
 # Initialize model
-model = init_chat_model("ollama:qwen3.5:latest")
+# model = init_chat_model("ollama:qwen3.5:latest")
+model_or_paid_gpt56_luna = init_chat_model("openai/gpt-5.6-luna",
+                        api_key=os.environ["OPENROUTER_API_KEY"],
+                        model_provider="openrouter",
+                        base_url="https://openrouter.ai/api/v1",
+                        max_tokens=500, temperature=0.0)
+
 
 # Define a tool as a dictionary (server-side)
 # Format: {"type": "<tool_name>", "description": "<description>", ...}
 tool = {"type": "web_search"}
 
 # Bind server-defined tools to the model
-model_with_tools = model.bind_tools([tool])
+model_with_tools = model_or_paid_gpt56_luna.bind_tools([tool])
 
 # Ask the model something that might require web search
 response = model_with_tools.invoke("What was a positive news story from today?")
