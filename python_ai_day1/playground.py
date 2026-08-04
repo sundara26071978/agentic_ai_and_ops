@@ -88,4 +88,5 @@ def greet(name: str) -> str:
 print(greet.__name__)      # Output: greet         ✅ CORRECT!
 print(greet.__doc__)       # Output: Say hello...  ✅ CORRECT!
 
-
+print(greet("Alice"))  # Output: Before calling function \n Hello, Alice!
+print(greet(name="Bob"))    # Output: Before calling function \n Hello, Bob!
