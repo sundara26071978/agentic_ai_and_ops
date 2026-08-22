@@ -91,7 +91,7 @@ pref_agent = create_agent(
 """# Node Style Hooks"""
 
 from langchain.agents.middleware import before_model, after_model
-
+import pprint
 @before_model
 def log_before_model(a,b):
   pass
