@@ -1,7 +1,7 @@
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
 from langgraph.checkpoint.memory import InMemorySaver
-
+from langgraph.types import Command
 from langchain.tools import tool
 from rich import print as rprint
 from langchain.chat_models import init_chat_model
@@ -137,16 +137,43 @@ for message in result["messages"]:
 # print("-" * 80)
 
 
-# 4. Reject the email
-print("-" * 80)
-rprint("4. Reject the email")
-from langgraph.types import Command
+# # 5. Reject the email
+# print("-" * 80)
+# rprint("4. Reject the email")
+# from langgraph.types import Command
+# result = agent.invoke(
+#     Command(
+#         resume={
+#             "decisions": [
+#                 {
+#                     "type": "reject"
+#                 }
+#             ]
+#         }
+#     ),
+#     config=config
+# )
+
+# rprint(result)
+
+# print("-" * 80)
+
+#6. Test EDIT
+
 result = agent.invoke(
     Command(
         resume={
             "decisions": [
                 {
-                    "type": "reject"
+                    "type": "edit",
+                    "edited_action": {
+                        "name": "your_send_email_tool",
+                        "args": {
+                            "recipient": "manager@example.com",
+                            "subject": "Trade Confirmation - REVIEWED",
+                            "body": "Please review and confirm the trade details."
+                        }
+                    }
                 }
             ]
         }
@@ -155,5 +182,3 @@ result = agent.invoke(
 )
 
 rprint(result)
-
-print("-" * 80)
