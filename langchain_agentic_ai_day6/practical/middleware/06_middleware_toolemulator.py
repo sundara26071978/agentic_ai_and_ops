@@ -1,3 +1,12 @@
+# LLM tool emulator
+# Emulate tool execution using an LLM for testing purposes, replacing actual tool calls with AI-generated responses. 
+# LLM tool emulators are useful for the following:
+# Testing agent behavior without executing real tools.
+# Developing agents when external tools are unavailable or expensive.
+# Prototyping agent workflows before implementing actual tools.
+
+
+
 import os
 
 from langchain.agents import create_agent
