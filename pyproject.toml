@@ -30,6 +30,7 @@ dependencies = [
     "langchainhub>=0.1.21",
     "chromadb>=1.5.9",
     "bs4>=0.0.2",
+    "langgraph-cli[inmem]>=0.4.31",
 ]
 
 [dependency-groups]
