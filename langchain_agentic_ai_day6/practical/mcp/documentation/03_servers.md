@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://modelcontextprotocol.io/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Understanding MCP servers
 
 MCP servers are programs that expose specific capabilities to AI applications through standardized protocol interfaces.

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://modelcontextprotocol.io/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # What is the Model Context Protocol (MCP)?
 
 MCP (Model Context Protocol) is an open-source standard for connecting AI applications to external systems.
