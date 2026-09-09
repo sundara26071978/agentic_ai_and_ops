@@ -1,0 +1,9 @@
+{
+    "dependencies": [
+      
+    ],
+    "graphs": {
+        "my_agent": "langgraph\\02sample_graph.py:agent"
+    },
+    "env": "langchain_agentic_ai_day6\\.env"
+}
