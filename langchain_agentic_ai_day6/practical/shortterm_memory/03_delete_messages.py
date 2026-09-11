@@ -1,3 +1,14 @@
+"""
+
+Delete messages
+You can delete messages from the graph state to manage the message history.
+This is useful when you want to remove specific messages or clear the entire message history.
+To delete messages from the graph state, you can use the RemoveMessage.
+For RemoveMessage to work, you need to use a state key with add_messages reducer.
+The default AgentState provides this.
+
+"""
+
 from langchain.messages import RemoveMessage
 from langchain.agents import create_agent, AgentState
 from langchain.agents.middleware import after_model
