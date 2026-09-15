@@ -1,0 +1,34 @@
+Short-term
+-----------
+(M) Interrupt and resume
+	Human-in-the-loop workflows - When a human input is needed (approve/Reject), Response, Edit
+	Tool Interrupt - External Tool calling (success and Failed Scenarios)
+(M) Time travel - Go back in history to change the work flow of the graph (EX: When Doc classifier is wrong)
+(M) Fault tolerance - When a graph has failed on a node it should be able to restart from the last successful step.
+(M) Fork/Pending writes - For performing back testing. Fork at a node to free the execution till the node to perform test of the remaining flows
+(M) Replay - For Agent reliability testing at task level or flow level.
+
+(M) Get state - Access to the state variables in the graph
+(O) Get state history - Full history of the graph state stored so far
+(O) Filter - state history to find specific checkpoints
+(O) DeltaChannel - Stores only incremental deltas instead of the full accumulated value at each check point (Performance test)
+(M) Operations on the Saver - Store a checkpoint, Fetch a check point with thread id, Get history of Thread ID +Check pointers
+(M) SerDe with encryption Checks - (Serialization with Encrypt when saving checkpoints and Deserialization with decrypt when retrieving)
+(M) Operations on Messages - Trim, Delete, Delete all, Summarize. 
+
+LongTerm Memory (Hotpath)
+---------------
+
+(M) Predefined store with namespace schemas- targeting a node specific State keys or Agent Specific Global state keys or a combination of nodes that combing more than two states.
+(M) Fetch Data from store similar to the search criteria defined in the namespace schema ( Keywork based search or semantic search, wildcard search)
+(M) Write Data to right Store  namespace schema.
+
+
+
+
+
+
+  
+
+
+
